@@ -1,5 +1,5 @@
 <script setup>
-import {ref,reactive} from 'vue'
+import {ref,computed} from 'vue'
 import {store} from '../store.js';
 import Cell from './Cell.vue';
 
@@ -9,13 +9,14 @@ const board_width=ref(`${store.cell_size*store.cell_cols}px`);
 const board_height=ref(`${store.cell_size*store.cell_rows}px`);
 const board_bc_size=ref(`${store.cell_size}px ${store.cell_size}px`);
 
-const cells=ref(store.cells);
-console.log(store.cells);
+//console.log(store.cells);
+
+const computed_cells=computed(()=>{
+    return store.cells;
+});
 
 function handle_click(e){
     emit('board_click',e);
-    cells.value=store.cells;
-    console.log(cells);
 }
 </script>
 
@@ -28,7 +29,7 @@ function handle_click(e){
         }"
         @click="handle_click"
     >
-        <Cell v-for="cell of cells" :x=cell.x :y=cell.y />
+        <Cell v-for="cell in computed_cells" :x=cell.x :y=cell.y :key="cell.x*100+cell.y"/>
     </div>
 </template>
 

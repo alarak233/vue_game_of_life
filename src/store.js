@@ -8,4 +8,5 @@ export const store=reactive({
     cells:[],
     is_running:false,
     percentage:0.2,
+    interval:100,
 });
