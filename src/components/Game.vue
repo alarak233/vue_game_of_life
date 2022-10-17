@@ -127,20 +127,34 @@ function random_make() {
     store.cells = make_cells();
 }
 
+function set_board(){
+    if(temp_cell_cols.value<5)temp_cell_cols.value=5;
+    if(temp_cell_rows.value<5)temp_cell_rows.value=5;
+
+    if(temp_cell_cols.value>70)temp_cell_cols.value=70;
+    if(temp_cell_rows.value>70)temp_cell_rows.value=70;
+
+    store.cell_cols=temp_cell_cols.value;
+    store.cell_rows=temp_cell_rows.value;
+}
+
 let game_start = null;
 
 store.board = make_empty_board();
 store.cells = make_cells();
+
+let temp_cell_cols=ref(store.cell_cols);
+let temp_cell_rows=ref(store.cell_rows);
 
 </script>
 
 <template>
     <div>
         <Board @board_click="handle_click" />
-        <div>
-            cols:<input type="number" :="store.cell_cols">
-            rows:<input type="number" v-model="store.cell_rows">
-            {{store.cell_cols}}
+        <div style="text-align:center;">
+            cols:<input type="number" v-model="temp_cell_cols">
+            rows:<input type="number" v-model="temp_cell_rows">
+            <button @click="set_board">set</button>
         </div>
         <div style="text-align:center;">interval:<input type="number" v-model="store.interval"></div>
         <div style="text-align:center;">

@@ -5,9 +5,9 @@ import Cell from './Cell.vue';
 
 const emit=defineEmits(['board_click']);
 
-const board_width=ref(`${store.cell_size*store.cell_cols}px`);
-const board_height=ref(`${store.cell_size*store.cell_rows}px`);
-const board_bc_size=ref(`${store.cell_size}px ${store.cell_size}px`);
+const board_width=computed(()=>{return `${store.cell_size*store.cell_cols}px`});
+const board_height=computed(()=>{return `${store.cell_size*store.cell_rows}px`});
+const board_bc_size=computed(()=>{return `${store.cell_size}px ${store.cell_size}px`});
 
 //console.log(store.cells);
 
